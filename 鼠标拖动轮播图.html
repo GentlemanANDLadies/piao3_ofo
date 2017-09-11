@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>lianxi2</title>
+	<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			list-style-type:none;
+		}
+		#slider{
+			width:800px;
+			margin:50px auto 0;
+			overflow: hidden;
+		}
+		#m-slider{
+			width:5600px;
+			overflow: hidden;
+		}
+		#m-slider li{
+			float: left;
+			width:800px;
+			height: 500px;
+			background: transparent;
+		}
+		#m-slider li img{
+			width:800px;
+			height: 500px;
+			vertical-align: top;
+		}
+</style>
+</head>
+<body>
+	<div id="slider">
+		<ul id="m-slider" class="cnt">
+			<li></li>
+			<li><img src="img/timg-1.jpg" alt="" /></a></li>
+			<li><img src="img/timg-2.jpg" alt="" /></a></li>
+			<li><img src="img/timg-3.jpg" alt="" /></a></li>
+			<li><img src="img/timg-4.jpg" alt="" /></a></li>
+			<li><img src="img/timg-5.jpg" alt="" /></a></li>
+			<li></li>
+		</ul>
+	</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+	var $slider = $("#m-slider");
+	var $li = $slider.children("li");
+	var X1,X2,X3,scroll,i = 1;
+	var bol = false;
+	var Width = $li.width();
+	var len = $li.length;
+
+	$slider.parent().scrollLeft(800)
+	// $li.find('img').mousemove(function(){
+	// 	return false;
+	// })
+
+	$slider.mousedown(function(ev){
+		if((ev.target.tagName == "LI" || ev.target.tagName == "IMG" )&& ev.button == 0){
+			console.log("hah")
+			bol = true;
+
+			X1 = ev.pageX;
+
+			scroll = $slider.parent().scrollLeft();
+
+			ev.preventDefault();
+
+		}
+	})
+
+	$slider.mousemove(function(ev){
+
+		if(bol){
+			
+			X2 = ev.pageX;
+
+			X3 = X1 - X2;
+
+			$slider.parent().scrollLeft(scroll + X3);
+
+		}
+	})
+
+	$slider.mouseup(function(ev){
+
+		bol = false;
+
+		X3 > 100 && i < (len-2) && i++;
+
+		X3 < -100 && i > 1 && i--;
+
+		$slider.parent().stop().animate({"scrollLeft":i*Width},300);
+
+	})
+
+	$slider.mouseout(function(ev){
+
+		if(bol){
+
+			bol = false;
+
+			X3 > 100 && i < (len-2)  && i++;
+
+			X3 < -100 && i > 1 && i--;
+
+			$slider.parent().stop().animate({"scrollLeft":i*Width},300);
+
+		}
+
+	})
+
+
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
