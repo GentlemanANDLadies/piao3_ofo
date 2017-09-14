@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script type="text/javascript">
+    setInterval(function(){
+        var date1 = new Date();
+        var date2 = new Date("2017,9,14,12:00:00");
+
+        var time = (date2 - date1)/1000;
+
+        var second = parseInt( time % 60 );
+
+        var day = parseInt(time / (3600*24));
+
+        var hour = parseInt(time / 3600);
+
+        hour = hour -(day * 24);
+
+        var minute = parseInt(time / 60) % 60;
+
+        console.log(day,hour,minute,second);
+        document.body.innerHTML = "剩余"+day+"天:"+hour+"时:"+minute+"分:"+second+"秒";
+
+    },1000) 
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

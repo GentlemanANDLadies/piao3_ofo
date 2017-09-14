@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+            list-style-type: none;
+        }
+        ul{
+            width:80%;
+            margin:50px auto 0;
+            position: relative; 
+        }
+        img{
+            width:100%;
+            vertical-align: top;
+        }
+        li{
+            position: absolute;
+            width:100%;
+            top:0;
+            opacity: 0;
+            transition:all 1s;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li style="opacity:1"><img src="img/1.jpg" alt=""></li>
+        <li><img src="img/2.jpg" alt=""></li>
+        <li><img src="img/3.jpg" alt=""></li>
+        <li><img src="img/4.jpg" alt=""></li>
+    </ul>
+</body>
+<script type="text/javascript">
+    var ul = document.getElementsByTagName('ul');
+    var li = document.getElementsByTagName('li');
+    var img = document.getElementsByTagName('img');
+    var num = 0;
+
+    var timer = setInterval(function(){
+        num++;
+        if(num>3){
+            num=0;
+        }
+        for (var i = 0; i < li.length; i++) {
+            li[i].style.zIndex = 0;
+            li[i].style.opacity = 0;
+        }
+        li[num].style.zIndex = 1;
+        li[num].style.opacity = 1;
+    },3000)
+</script>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            width:400px;
+            height: 300px;
+        }
+        #box img{
+            width:400px;
+            height: 300px;
+        }
+        #max{
+            width:400px;
+            height: 300px;
+            position: absolute;
+            left:400px;
+            top:0;
+            overflow: hidden;
+            display: none;
+        }
+        #max img{
+           width:800px;
+            height: 600px; 
+            position:absolute;
+        }
+        .pointer{
+            position: absolute;
+            left:0;
+            top:0;
+            width:100px;
+            height: 80px;
+            background:rgba(92,234,110,0.6);
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <img src="1.jpg" alt="">
+    </div>
+    <div id="max">
+        <img src="1.jpg" alt="">
+    </div>
+</body>
+<script src="jquery.js"></script>
+<script type="text/javascript">
+    var $box = $("#box"),$img1 = $("#box img"),$max = $("#max"),$img2 = $("#max img");
+    $box.mousemove(function(ev){
+        if($(".pointer").length == 0){
+             $("<div class='pointer'></div>").appendTo($box);
+        }
+        $max.show();
+        var maxW = $box.width() - $(".pointer").width();
+        var maxH = $box.height() - $(".pointer").height();
+        // console.log(maxH,maxW);
+        var disX = ev.clientX - $('.pointer').width()/2;
+        var disY = ev.clientY - $('.pointer').height()/2;
+        // console.log(disX,disY)
+        if(disX < 0){
+            disX = 0;
+        }else if(disX > maxW) {
+            disX = maxW;
+        }
+        if(disY < 0 ){
+            disY = 0;
+        }else if (disY > maxH){
+            disY = maxH;
+        }
+        $('.pointer').css({
+            left:disX + "px",
+            top: disY + "px"
+        })
+
+        var l = disX/maxW;
+        var t = disY/maxH;
+  
+       $img2.css({
+            left:-l*($img2.width()-$max.width())+"px",
+            top:-t*($img2.height()-$max.height())+"px"
+       })
+
+    })
+    $box.mouseleave(function(){
+        $(".pointer").remove(); 
+        $max.hide();
+    })
+
+
+</script>
+</html>
